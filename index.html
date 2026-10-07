@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fady Rizkalla</title>
+<meta name="description" content="Fady Rizkalla, Computer Science student at Concordia University and software developer. Previously at Ericsson and Coveo.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111827'/><text x='50' y='66' font-size='46' font-family='Arial' font-weight='700' text-anchor='middle' fill='%2334d399'>FR</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b1120;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --dim: #64748b;
+    --accent: #34d399;
+    --accent-bg: rgba(52, 211, 153, .1);
+    --card-hover: rgba(30, 41, 59, .5);
+    --line: #1e293b;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--muted);
+    font: 16px/1.65 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+
+  /* Soft spotlight that follows the cursor */
+  .spotlight {
+    pointer-events: none; position: fixed; inset: 0; z-index: 0;
+    background: radial-gradient(600px at var(--x, 50%) var(--y, 20%), rgba(52, 211, 153, .07), transparent 80%);
+  }
+
+  .layout {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto; padding: 0 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  }
+
+  /* Left column */
+  .side {
+    position: sticky; top: 0; height: 100vh; padding: 96px 0;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  h1 { color: var(--text); font-size: 48px; line-height: 1.1; margin: 0; letter-spacing: -.02em; }
+  .title { color: var(--text); font-size: 20px; font-weight: 500; margin: 12px 0 0; }
+  .tagline { max-width: 320px; margin: 16px 0 0; }
+
+  nav ul { list-style: none; padding: 0; margin: 64px 0 0; }
+  nav li a {
+    display: flex; align-items: center; gap: 16px; padding: 12px 0;
+    font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dim);
+  }
+  nav li a::before {
+    content: ""; height: 1px; width: 32px; background: var(--dim); transition: all .2s;
+  }
+  nav li a:hover, nav li a.active { color: var(--text); }
+  nav li a:hover::before, nav li a.active::before { width: 64px; background: var(--text); }
+
+  .socials { display: flex; gap: 20px; margin: 0; padding: 0; list-style: none; }
+  .socials a { color: var(--muted); transition: color .2s; display: block; }
+  .socials a:hover { color: var(--text); }
+  .socials svg { width: 24px; height: 24px; display: block; }
+
+  /* Right column */
+  .content { padding: 96px 0; }
+  section { scroll-margin-top: 96px; margin-bottom: 120px; }
+  .sec-title { display: none; }
+  .about p { margin: 0 0 16px; }
+  .about strong { color: var(--text); font-weight: 500; }
+
+  .cards { list-style: none; margin: 0; padding: 0; }
+  .card {
+    position: relative; display: grid; grid-template-columns: 1fr 3fr; gap: 16px;
+    padding: 20px; margin: 0 -20px 16px; border-radius: 8px; transition: all .2s;
+  }
+  .cards:hover .card { opacity: .5; }
+  .cards:hover .card:hover {
+    opacity: 1; background: var(--card-hover);
+    box-shadow: inset 0 1px 0 0 rgba(148, 163, 184, .1);
+  }
+  .card .when {
+    font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--dim); margin-top: 4px;
+  }
+  .card h3 { color: var(--text); font-size: 16px; font-weight: 500; line-height: 1.4; margin: 0; }
+  .card:hover h3 { color: var(--accent); }
+  .card .sub { color: var(--dim); font-size: 15px; }
+  .card p, .card ul { font-size: 14px; margin: 8px 0 0; }
+  .card ul { padding-left: 18px; }
+  .card li { margin-bottom: 4px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+  .tags li {
+    font-size: 12px; font-weight: 500; color: var(--accent); background: var(--accent-bg);
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 600; color: var(--bg); background: var(--accent);
+    padding: 1px 8px; border-radius: 4px; margin-left: 6px; vertical-align: 2px;
+  }
+
+  .awards { list-style: none; padding: 0; margin: 0; }
+  .awards li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .awards li span:first-child { color: var(--text); }
+  .awards li span:last-child { color: var(--dim); white-space: nowrap; font-size: 13px; }
+
+  .resume-link { display: inline-flex; gap: 8px; color: var(--text); font-weight: 500; margin-top: 8px; }
+  .resume-link:hover { color: var(--accent); }
+
+  footer { font-size: 14px; color: var(--dim); max-width: 420px; }
+  footer a { color: var(--muted); font-weight: 500; }
+  footer a:hover { color: var(--accent); }
+
+  /* Mobile: single column, section titles shown */
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: 1fr; gap: 0; padding: 0 24px; }
+    .side { position: static; height: auto; padding: 64px 0 32px; }
+    nav { display: none; }
+    .socials { margin-top: 32px; }
+    .content { padding: 32px 0 64px; }
+    section { margin-bottom: 80px; }
+    .sec-title {
+      display: block; position: sticky; top: 0; z-index: 5;
+      margin: 0 -24px 16px; padding: 16px 24px;
+      background: rgba(11, 17, 32, .8); backdrop-filter: blur(8px);
+      color: var(--text); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    }
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 38px; }
+    .card { grid-template-columns: 1fr; gap: 4px; margin: 0 0 16px; padding: 0; }
+    .cards:hover .card { opacity: 1; }
+    .cards:hover .card:hover { background: none; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="spotlight" id="spotlight"></div>
+
+<div class="layout">
+  <header class="side">
+    <div>
+      <h1>Fady Rizkalla</h1>
+      <p class="title">Software Developer</p>
+      <p class="tagline">I'm a CS Co-op student at Concordia. I build distributed systems, real-time apps and ML projects.</p>
+      <nav>
+        <ul>
+          <li><a href="#about" class="active">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+        </ul>
+      </nav>
+    </div>
+    <ul class="socials">
+      <li><a href="https://github.com/FadyRizkalla" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></svg></a></li>
+      <!-- Add your LinkedIn URL and uncomment:
+      <li><a href="https://www.linkedin.com/in/fady-rizkalla-620bb9292/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg></a></li>
+      -->
+      <li><a href="mailto:fadigamal57@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></a></li>
+    </ul>
+  </header>
+
+  <main class="content">
+    <section id="about" class="about">
+      <h2 class="sec-title">About</h2>
+      <p>I'm a Computer Science Co-op student at <strong>Concordia University</strong> in Montreal, graduating in December 2027. I've done two software internships. At <strong>Ericsson</strong> I worked on 5G network slicing, and at <strong>Coveo</strong> I worked on scalable APIs.</p>
+      <p>I got into programming through competitive programming. I won a silver medal at the <strong>International Olympiad in Informatics for Teams</strong> and was champion of the <strong>Arab and Africa Collegiate Programming Contest for Teens</strong>. Now I enjoy working on backend systems, cloud infrastructure and machine learning.</p>
+      <p>I'm also a member of Concordia's Biomedical Engineering Club and Competitive Programming Club.</p>
+    </section>
+
+    <section id="experience">
+      <h2 class="sec-title">Experience</h2>
+      <ol class="cards">
+        <li class="card">
+          <div class="when">Jan — Aug 2026</div>
+          <div>
+            <h3>Software Developer Intern · Ericsson</h3>
+            <div class="sub">Cloud &amp; Core Research Center · Montreal</div>
+            <ul>
+              <li>Worked on 5G Core Network technologies and network slicing.</li>
+              <li>Developed and analyzed components of sliced 5G architectures using Go, C++ and Kubernetes.</li>
+              <li>Gained hands-on experience with 5G Core concepts, including traffic handling, scalability and slice isolation.</li>
+            </ul>
+            <ul class="tags"><li>Go</li><li>C++</li><li>Kubernetes</li><li>5G Core</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="when">Sept — Dec 2025</div>
+          <div>
+            <h3>Software Developer Intern · Coveo</h3>
+            <div class="sub">Knowledge Core Team, R&amp;D · Montreal</div>
+            <ul>
+              <li>Full-stack developer on the Customer Service API, where I optimized key endpoints.</li>
+              <li>Used AWS Lambda and SQS to make the Batch Answer API more scalable and reliable.</li>
+              <li>Implemented CRUD operations for the Long Form Case Answering feature, which handles complex customer queries.</li>
+            </ul>
+            <ul class="tags"><li>AWS Lambda</li><li>AWS SQS</li><li>REST APIs</li><li>Full-stack</li></ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="projects">
+      <h2 class="sec-title">Projects</h2>
+      <ul class="cards">
+        <li class="card">
+          <div class="when">2025</div>
+          <div>
+            <h3>Compete <span class="badge">Hackathon winner</span></h3>
+            <p>A real-time competitor monitoring platform that scrapes storefronts, detects pricing and promotion changes, and automates ad funnels. It won Best Use of API at McGill CodeJam 15 among 70+ teams.</p>
+            <ul class="tags"><li>Next.js</li><li>MongoDB</li><li>Firebase</li><li>Playwright</li><li>AI Agents</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="when">2026</div>
+          <div>
+            <h3>Real-Time Type Racer</h3>
+            <p>A multiplayer typing race with a Go backend. It runs concurrent game sessions over WebSockets and keeps the race state on the server to sync players live.</p>
+            <ul class="tags"><li>Go</li><li>WebSockets</li><li>PostgreSQL</li><li>React</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="when">2026</div>
+          <div>
+            <h3><a href="https://github.com/FadyRizkalla" target="_blank" rel="noopener">Early Sketch Recognition ↗</a></h3>
+            <p>Classifies QuickDraw sketches from partial strokes. It compares CNN, RNN and Transformer models on how early they can recognize a drawing.</p>
+            <ul class="tags"><li>Python</li><li>PyTorch</li><li>Deep Learning</li></ul>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="achievements">
+      <h2 class="sec-title">Achievements</h2>
+      <ul class="awards">
+        <li><span>Winner, McGill CodeJam 15 (Best Use of API)</span><span>2025</span></li>
+        <li><span>Top 30%, ICPC NENA Qualification Round</span><span>2025</span></li>
+        <li><span>Silver Medal, IOI for Teams</span><span>2023</span></li>
+        <li><span>Champion, Arab &amp; Africa CPC for Teens</span><span>2022</span></li>
+        <li><span>Bronze Medal, Egyptian Olympiad in Informatics</span><span>2021, 2022</span></li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>Want to get in touch? Email me at <a href="mailto:fadigamal57@gmail.com">fadigamal57@gmail.com</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // cursor spotlight
+  const spot = document.getElementById('spotlight');
+  addEventListener('pointermove', (e) => {
+    spot.style.setProperty('--x', e.clientX + 'px');
+    spot.style.setProperty('--y', e.clientY + 'px');
+  });
+
+  // highlight the nav link for the section in view
+  const links = [...document.querySelectorAll('nav a')];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) links.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  document.querySelectorAll('main section').forEach((s) => io.observe(s));
+</script>
+</body>
+</html>
